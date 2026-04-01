@@ -4,7 +4,7 @@
 
 #include "Extension/httplib.h"
 #include "Extension/Information.h"
-#include "GSICreator.h"
+#include "Extension/GSICreator.h"
 #include "Extension/json.hpp"
 
 
@@ -213,28 +213,31 @@ void on_forbomb(EventType type, Func&& callback) {
     std::lock_guard<std::mutex> lock(listeners_mutex);
     bombListeners[type].push_back(std::forward<Func>(callback));
 }
-template<typename Func> //кажу, що онкілл це тип кілл і приймає функцію, яка буде викликана при настанні події кілл
-void onKill(Func&& callback,Filters filters) {
-    
-    on(EventType::Kill, [cb = std::forward<Func>(callback), filters = std::forward<Filters>(filters)](const KillEvent& e) mutable {
-        if (!filters.ActorId.has_value() || e.actorId == filters.ActorId.value()) {
-            cb(e);
+template<typename Func>
+void onKill(Func&& callback, Filters filters) {
+
+    on(EventType::Kill,
+        [cb = std::forward<Func>(callback), filters](const Player& p) mutable {
+
+            if (!filters.ActorId || p.steamid == *filters.ActorId) {
+                cb(p);
+            }
         }
-    });
+    );
 }
 template<typename Func> //кажу, що ондеат це тип дед і приймає функцію, яка буде викликана при настанні події дед
 void onDeath(Func&& callback,Filters filters) {
-    on(EventType::Death, [cb = std::forward<Func>(callback), filters = std::forward<Filters>(filters)](const KillEvent& e) mutable {
-        if (!filters.ActorId.has_value() || e.actorId == filters.ActorId.value()) {
-            cb(e);
+    on(EventType::Death, [cb = std::forward<Func>(callback), filters = std::forward<Filters>(filters)](const Player& p) mutable {
+        if (!filters.ActorId.has_value() || p.steamid == filters.ActorId.value()) {
+            cb(p);
         }
     });
 }
 template<typename Func> //кажу, що онассист це тип ассист і приймає функцію, яка буде викликана при настанні події ассист
 void onAssist(Func&& callback,Filters filters) {
-    on(EventType::Assist, [cb = std::forward<Func>(callback), filters = std::forward<Filters>(filters)](const KillEvent& e) mutable {
-        if (!filters.ActorId.has_value() || e.actorId == filters.ActorId.value()) {
-            cb(e);
+    on(EventType::Assist, [cb = std::forward<Func>(callback), filters = std::forward<Filters>(filters)](const Player& p) mutable {
+        if (!filters.ActorId.has_value() || p.steamid == filters.ActorId.value()) {
+            cb(p);
         }
     });
 }

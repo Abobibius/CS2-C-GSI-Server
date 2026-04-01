@@ -2,6 +2,7 @@
 
 #include <string>
 #include <map>
+#include <optional>
 
 struct State {
     int health = 0;
@@ -113,15 +114,14 @@ enum class EventType {
     Plantbomb,
     Defusebomb
 };
-struct Filters{
-    std::optional<std::string> ActorId;    
-};
 struct Event {
     std::string type;
     std::string player;
     
 };
-
+struct Filters{
+    std::optional<std::string> ActorId;    
+};
 /*--------------------Console Structure ---------------------*/
 
 struct ParsedCommand {

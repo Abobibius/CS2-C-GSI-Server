@@ -25,12 +25,10 @@ int main() {
     };
     /*declaration of Filters*/
     Filters filters;
-    filters.ActorId = "76561197968303909"; //some id of player, that should be listened, if empty - all players will be listened
-
-    server.onKill([&server](const Player& p) {
+    server.onKill([&server](const Player &p) { //Example of callback function for kill event, that will be called every time when player with id 76561197968303909 will get a kill
 
     /*callbackfuctions*/
-    cout<< "Kill event: " << p.name << " (" << p.steamid << ") now has " << p.match_stats.kills << " kills.\n";
+    cout<< "Kill event: " << p.name << " got a kill! Total kills: " << p.match_stats.kills << "\n";
     /*callbackfuctions*/
 
 }, filters); /* + filters*/
@@ -38,3 +36,5 @@ int main() {
     console.run(); //console run
     return 0;   
 }
+
+// ДОДАТИ КРЧ КАСТОМНІ ФІЛЬТРИ ЯКІ МОЖНА САМОМУ ПИСАТИ + ВИПРАВИТИ СИСТЕМУ, ЩОБ МОЖНА БУЛО ДЕКІЛЬКА ФІЛЬТРІВ ДОДАВАТИ

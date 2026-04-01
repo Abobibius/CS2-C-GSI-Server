@@ -269,7 +269,7 @@ int main() {
 }
 
 
- ```
+
 
 ## Configuration
 
@@ -351,3 +351,5 @@ This library is provided as-is for integration with Counter-Strike 2.
 ## Contributing
 
 For issues, suggestions, or improvements, please contribute or report issues.
+
+---
