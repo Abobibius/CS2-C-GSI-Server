@@ -208,7 +208,7 @@ Event filtering options.
 2. **Include the main header:**
    ```cpp
    #include "GSI_LIB.h"
- 
+   ```
 3. **Initialize the server:**
    ```cpp
    GSTServer server;
@@ -267,15 +267,13 @@ int main() {
     console.run(); //console run
     return 0;   
 }
-
-
-
+```
 
 ## Configuration
 
 The library automatically generates a GSI config file in the CS2 directory. The configuration includes:
 
-```
+```cfg
 "GST"
 {
     "uri"                   "http://127.0.0.1:3000"
@@ -351,5 +349,4 @@ This library is provided as-is for integration with Counter-Strike 2.
 ## Contributing
 
 For issues, suggestions, or improvements, please contribute or report issues.
-
 ---
